@@ -8,6 +8,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'clean',
+    'browserify:index',
     'copy:build',
     'compass:build',
     'connect:build',

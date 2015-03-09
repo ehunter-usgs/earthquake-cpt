@@ -5,8 +5,7 @@ var config = require('./config');
 var watch = {
   resources: {
     files: [
-      config.src + '/htdocs/index.html',
-      config.src + '/htdocs/js/index.js'
+      config.src + '/htdocs/index.html'
     ],
     tasks: [
       'copy:build'
@@ -19,6 +18,15 @@ var watch = {
     ],
     tasks: [
       'compass:build'
+    ]
+  },
+
+  scripts: {
+    files: [
+      config.src + '/htdocs/**/*.js'
+    ],
+    tasks: [
+      'browserify:index'
     ]
   },
 
