@@ -6,7 +6,8 @@ module.exports = function (grunt) {
   gruntConfig.tasks.forEach(grunt.loadNpmTasks);
   grunt.initConfig(gruntConfig);
 
-  grunt.registerTask('default', function () {
-    console.log('Default task run.');
-  });
+  grunt.registerTask('default', [
+    'copy:build',
+    'connect:build:keepalive'
+  ]);
 };
