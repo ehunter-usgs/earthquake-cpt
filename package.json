@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/usgs/earthquake-cpt/issues"
   },
-  "homepage": "https://github.com/usgs/earthquake-cpt"
+  "homepage": "https://github.com/usgs/earthquake-cpt",
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  }
 }
