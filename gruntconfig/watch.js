@@ -5,7 +5,9 @@ var config = require('./config');
 var watch = {
   resources: {
     files: [
-      config.src + '/htdocs/index.html'
+      config.src + '/**/*',
+      '!' + config.src + '/**/*.scss',
+      '!' + config.src + '/**/*.js'
     ],
     tasks: [
       'copy:build'

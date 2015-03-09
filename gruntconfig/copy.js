@@ -8,8 +8,9 @@ var copy = {
     cwd: config.src,
     dest: config.build + '/' + config.src,
     src: [
-      'htdocs/index.html',
-      'htdocs/js/index.js'
+      '**/*',
+      '!**/*.scss',
+      '!**/*.js'
     ]
   }
 };
