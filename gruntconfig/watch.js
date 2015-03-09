@@ -26,7 +26,18 @@ var watch = {
       config.src + '/htdocs/**/*.js'
     ],
     tasks: [
+      'jshint:scripts',
       'browserify:index'
+    ]
+  },
+
+  gruntfile: {
+    files: [
+      'Gruntfile.js',
+      'gruntconfig/**/*.js'
+    ],
+    tasks: [
+      'jshint:gruntfile'
     ]
   },
 

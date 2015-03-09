@@ -7,6 +7,7 @@ var gruntConfig = {
   compass: require('./compass'),
   connect: require('./connect'),
   copy: require('./copy'),
+  jshint: require('./jshint'),
   watch: require('./watch'),
 
   tasks: [
@@ -15,6 +16,7 @@ var gruntConfig = {
     'grunt-contrib-compass',
     'grunt-contrib-connect',
     'grunt-contrib-copy',
+    'grunt-contrib-jshint',
     'grunt-contrib-watch'
   ]
 };
