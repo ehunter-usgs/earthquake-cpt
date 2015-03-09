@@ -9,6 +9,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'clean',
     'copy:build',
+    'compass:build',
     'connect:build',
     'watch'
   ]);

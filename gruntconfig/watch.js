@@ -6,11 +6,19 @@ var watch = {
   resources: {
     files: [
       config.src + '/htdocs/index.html',
-      config.src + '/htdocs/css/index.css',
       config.src + '/htdocs/js/index.js'
     ],
     tasks: [
       'copy:build'
+    ]
+  },
+
+  compass: {
+    files: [
+      config.src + '/htdocs/**/*.scss'
+    ],
+    tasks: [
+      'compass:build'
     ]
   },
 
@@ -19,9 +27,9 @@ var watch = {
       livereload: config.liveReloadPort
     },
     files: [
-      config.build + '/htdocs/index.html',
-      config.build + '/htdocs/css/index.css',
-      config.build + '/htdocs/js/index.js'
+      config.build + '/' + config.src + '/htdocs/index.html',
+      config.build + '/' + config.src + '/htdocs/css/index.css',
+      config.build + '/' + config.src + '/htdocs/js/index.js'
     ]
   }
 };
