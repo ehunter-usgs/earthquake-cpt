@@ -2,7 +2,10 @@
 
 var gruntConfig = {
 
+  copy: require('./copy'),
+
   tasks: [
+    'grunt-contrib-copy'
   ]
 };
 
