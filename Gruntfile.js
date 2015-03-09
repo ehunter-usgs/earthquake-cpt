@@ -7,6 +7,7 @@ module.exports = function (grunt) {
   grunt.initConfig(gruntConfig);
 
   grunt.registerTask('default', [
+    'clean',
     'copy:build',
     'connect:build',
     'watch'
