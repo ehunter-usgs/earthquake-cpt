@@ -1,7 +1,8 @@
-// var CPT = function() {
+/* global DATA_URL */
 
 var CPT = require('./CPT');
 
 CPT({
-  container: document.querySelector('#map')
+  container: document.querySelector('#map'),
+  url: DATA_URL
 });

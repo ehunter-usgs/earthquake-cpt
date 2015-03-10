@@ -2,10 +2,20 @@
 
 var config = require('./config');
 
+var iniConfig = require('ini').parse(require('fs')
+    .readFileSync(config.src + '/conf/config.ini', 'utf-8'));
+
+var rewrites = [
+  {
+    from: '^/data/?(\\w+)?/?(table|map)?/?$',
+    to: iniConfig.MOUNT_PATH + '/data.php?region=$1&display=$2'
+  }
+];
 
 var addMiddleware = function (connect, options, middlewares) {
   middlewares.unshift(
     require('grunt-connect-proxy/lib/utils').proxyRequest,
+    require('http-rewrite-middleware').getMiddleware(rewrites),
     require('gateway')(options.base[0], {
       '.php': 'php-cgi',
       'env': {

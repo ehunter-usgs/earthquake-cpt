@@ -5,10 +5,7 @@ if (!isset($TEMPLATE)) {
   include_once 'functions.inc.php';
 
   $HEAD = '
-    <link rel="stylesheet" href="css/data.css"/>
-  ';
-  $FOOT = '
-    <script src="js/data.js"></script>
+    <link rel="stylesheet" href="' . $MOUNT_PATH . '/css/data.css"/>
   ';
 
   $region = '';
@@ -22,10 +19,40 @@ if (!isset($TEMPLATE)) {
     $display = $_GET['display'];
   }
 
+
   // array of regions
   include_once 'regions.inc.php';
 
+  $NAVIGATION = '';
+  foreach ($regions as $key => $value) {
+    if (is_array($value)) {
+      $children = '';
+      foreach ($value as $child_key => $child_value) {
+        $children .= navItem($MOUNT_PATH . '/data/' . $child_key . '/',
+            $child_value);
+      }
+      $NAVIGATION .= navGroup($key, $children);
+    } else {
+      if ($key === '') {
+        if ($region === '') {
+          $NAVIGATION .= '<strong>' . $value . '</strong>';
+        } else {
+          $NAVIGATION .= '<a href="' . $MOUNT_PATH . '/data/">' . $value .
+              '</a>';
+        }
+      } else {
+        $NAVIGATION .= navItem($MOUNT_PATH . '/data/' . $key . '/', $value);
+      }
+    }
+  }
+
   if ($display == 'map') {
+
+    $FOOT = '
+      <script>var DATA_URL = \'' . $MOUNT_PATH . '/getStationList.json.php?region=' . $region . '\';</script>
+      <script src="' . $MOUNT_PATH . '/js/data.js"></script>
+    ';
+
     $html = sprintf ('<div id="map" class="%s"></div>', $region);
     $html .= '<p id="numstations"></p>';
     $html .= '<p><a href="./table/">View data in tabular format</a> &raquo;</p>';

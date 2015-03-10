@@ -16,6 +16,7 @@ var CPT = function (options) {
       _ctrlLayers,
       _map,
       _markers,
+      _url,
 
       _addBaseLayers,
       _addMarkers,
@@ -27,6 +28,7 @@ var CPT = function (options) {
 
   _initialize = function (options) {
     _container = options.container || document.createElement('div');
+    _url = options.url || 'getStationList.json.php';
 
     _initMap();
   };
@@ -120,7 +122,7 @@ var CPT = function (options) {
 
   _fetchMarkers = function () {
     Xhr.ajax({
-      url: 'getStationList.json.php',
+      url: _url,
       success: function (data) {
         _addMarkers(data);
       }
