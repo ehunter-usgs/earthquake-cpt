@@ -1,6 +1,7 @@
 <?php
 if (!isset($TEMPLATE)) {
   $TITLE = "Cone Penetration Testing (CPT)";
+  $NAVIGATION = true;
   $HEAD = '<link rel="stylesheet" href="../style.css"/>';
 
   include_once 'template.inc.php';
