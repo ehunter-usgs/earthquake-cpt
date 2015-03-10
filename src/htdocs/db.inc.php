@@ -7,15 +7,20 @@ include_once '../conf/config.inc.php';
 if (!function_exists('data_file_exists')) {
 
   function data_file_exists ($result, $extension) {
-    $file = $GLOBALS['DATA_DIR'] . '/' . $extension . '/' . $result['sounding'] . '.' .
-        $extension;
+    $file = $GLOBALS['DATA_DIR'] . '/' . $extension . '/' .
+        $result['sounding'] . '.' . $extension;
     return file_exists($file);
   }
 }
 
 try {
   $allowed = '/^[\w-.]+$/';
+
   $region = param('region', '');
+
+  if ($region == 'table') {
+    $region = '';
+  }
 
   if (!preg_match($allowed, $region)) {
     $region = '';

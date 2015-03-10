@@ -9,16 +9,20 @@ if (!isset($TEMPLATE)) {
   ';
 
   $region = '';
+  $display = 'map';
+
   if (isset($_GET['region']) && preg_match("/^\w+$/", $_GET['region'])) {
     $region = $_GET['region'];
   }
+  if ($region == 'table') {
+    $display = 'table';
+    $region = '';
+  }
   ($region == '' ? $db_filter = '%' : $db_filter = strtolower($region));
 
-  $display = 'map';
   if (isset($_GET['display']) && preg_match("/^(table|map)$/", $_GET['display'])) {
     $display = $_GET['display'];
   }
-
 
   // array of regions
   include_once 'regions.inc.php';

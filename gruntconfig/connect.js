@@ -7,8 +7,12 @@ var iniConfig = require('ini').parse(require('fs')
 
 var rewrites = [
   {
-    from: '^/data/?(\\w+)?/?(table|map)?/?$',
-    to: iniConfig.MOUNT_PATH + '/data.php?region=$1&display=$2'
+    from: '^' + iniConfig.MOUNT_PATH + '/data/?(\\w+)?/?(table|map)?/?$',
+    to: '/data.php?region=$1&display=$2'
+  },
+  {
+    from: '^' + iniConfig.MOUNT_PATH + '/?(.*)$',
+    to: '/$1'
   }
 ];
 
@@ -64,7 +68,7 @@ var connect = {
       base: [config.build + '/' + config.src + '/htdocs'],
       livereload: config.liveReloadPort,
       middleware: addMiddleware,
-      open: 'http://localhost:' + config.buildPort + '/index.php',
+      open: 'http://localhost:' + config.buildPort + iniConfig.MOUNT_PATH + '/index.php',
       port: config.buildPort
     }
   },
