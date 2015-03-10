@@ -8,7 +8,9 @@ var browerify = {
       debug: true,
       paths: [
         process.cwd() + '/' + config.src + '/htdocs/js',
-        process.cwd() + '/node_modules/leaflet/dist'
+        process.cwd() + '/node_modules/leaflet/dist',
+        process.cwd() + '/node_modules/leaflet.markercluster/dist',
+        process.cwd() + '/node_modules/hazdev-webutils/src'
       ]
     }
   },

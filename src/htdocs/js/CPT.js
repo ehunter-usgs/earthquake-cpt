@@ -1,13 +1,17 @@
 'use strict';
 
-var L = require('leaflet');
+var L = require('leaflet'),
+    Xhr = require('util/Xhr');
+
+require('leaflet.markercluster-src');
+
 
 var CPT = function (options) {
   var _this,
       _initialize,
 
       _bounds,
-      // _cluster,
+      _cluster,
       _container,
       _ctrlLayers,
       _map,
@@ -15,6 +19,7 @@ var CPT = function (options) {
 
       _addBaseLayers,
       _addMarkers,
+      _fetchMarkers,
       _initMap;
 
 
@@ -49,14 +54,14 @@ var CPT = function (options) {
         .addBaseLayer(sat, 'Satellite');
   };
 
-  _addMarkers = function () {
-    // _cluster = new L.MarkerClusterGroup({
-    //   showCoverageOnHover: false,
-    //   maxClusterRadius: 60,
-    //   disableClusteringAtZoom: 9
-    // });
+  _addMarkers = function (markerData) {
+    _cluster = new L.MarkerClusterGroup({
+      showCoverageOnHover: false,
+      maxClusterRadius: 60,
+      disableClusteringAtZoom: 9
+    });
 
-    _markers = L.geoJson([], {
+    _markers = L.geoJson(markerData, {
       pointToLayer: function (feature, latlng) {
         var marker;
 
@@ -69,7 +74,7 @@ var CPT = function (options) {
           fillColor: '#C00',
           fillOpacity: 0.2
         });
-        // _cluster.addLayer(marker);
+        _cluster.addLayer(marker);
         return marker;
       },
       onEachFeature: function (feature, layer) {
@@ -104,12 +109,22 @@ var CPT = function (options) {
         ].join(''));
       }
     });
+    _map.fitBounds(_bounds);
 
-    // if (count > 300) {
-    //   map.addLayer(cluster);
-    // } else {
-    //   map.addLayer(markers);
-    // }
+    if (markerData.metadata.count > 300) {
+      _map.addLayer(_cluster);
+    } else {
+      _map.addLayer(_markers);
+    }
+  };
+
+  _fetchMarkers = function () {
+    Xhr.ajax({
+      url: 'getStationList.json.php',
+      success: function (data) {
+        _addMarkers(data);
+      }
+    });
   };
 
   _initMap = function () {
@@ -117,13 +132,14 @@ var CPT = function (options) {
       scrollWheelZoom: false
     });
 
-    _bounds = L.latLngBounds();
+    // seems like a bug in Leaflet implementation, need to use "new" form
+    _bounds = new L.LatLngBounds();
 
     _ctrlLayers = L.control.layers().addTo(_map);
     L.control.scale().addTo(_map);
 
     _addBaseLayers();
-    _addMarkers();
+    _fetchMarkers();
   };
 
 

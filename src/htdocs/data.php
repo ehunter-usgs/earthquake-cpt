@@ -2,6 +2,7 @@
 
 if (!isset($TEMPLATE)) {
   include_once '../conf/config.inc.php';
+  include_once 'functions.inc.php';
 
   $HEAD = '
     <link rel="stylesheet" href="css/data.css"/>
@@ -9,11 +10,6 @@ if (!isset($TEMPLATE)) {
   $FOOT = '
     <script src="js/data.js"></script>
   ';
-
-  // $STYLESHEETS = '/style.css,' .
-  //   '/library/com/leaflet-0.6.4/leaflet.css,' .
-  //   '/library/com/leaflet-0.6.4/MarkerCluster.Default.css,' .
-  //   '/library/com/leaflet-0.6.4/MarkerCluster.css';
 
   $region = '';
   if (isset($_GET['region']) && preg_match("/^\w+$/", $_GET['region'])) {
@@ -30,62 +26,78 @@ if (!isset($TEMPLATE)) {
   include_once 'regions.inc.php';
 
   if ($display == 'map') {
-
-    // $SCRIPTS = '/library/com/leaflet-0.6.4/leaflet.min.js,' .
-    //   '/library/com/leaflet-0.6.4/leaflet.markercluster.min.js,' .
-    //   'script.js,' .
-    //   '/research/cpt/getStationList.json.php?callback=CPT.storeSoundings&region=' . $region;
-    //
-
-
     $html = sprintf ('<div id="map" class="%s"></div>', $region);
     $html .= '<p id="numstations"></p>';
     $html .= '<p><a href="./table/">View data in tabular format</a> &raquo;</p>';
-    if ($region == 'alameda') $html .= '<h2>See Also</h2><p><a href="/regional/nca/alameda/">Liquefaction Hazard and Shaking Maps</a> for Alameda County, CA</p>';
+    if ($region == 'alameda') {
+      $html .= '<h2>See Also</h2><p><a href="/regional/nca/alameda/">Liquefaction Hazard and Shaking Maps</a> for Alameda County, CA</p>';
+    }
 
   } else {
-
-    // query db w/ region parameter
-    $query_rsPoints = sprintf("SELECT * FROM nca_cptdata WHERE `map` LIKE '%s' ORDER BY sounding ASC", $db_filter);
-    $rsPoints = mysql_query($query_rsPoints, $db) or die(mysql_error());
-
+    include_once 'db.inc.php';
     $html = '<table id="soundings" cellspacing="1" class="tabular">';
     $html .= '<tr><th>Sounding</th><th>Download</th><th>Date</th><th>Depth (m)</th><th>Longitude</th><th>Latitude</th><th>V,30 (m/s)</th></tr>';
-    while ($row_rsPoints = mysql_fetch_assoc($rsPoints)) {
-      $pdf_file = sprintf('%s/pdf/%s.pdf', $_SERVER['REDIRECT_APP_DATA_DIR'], $row_rsPoints['sounding']);
-      $pdf = 'Adobe .pdf';
-      if (file_exists($pdf_file)) {
-        $pdf = sprintf('<a href="%s/data/pdf/%s.pdf">Adobe .pdf</a>', $_SERVER['REDIRECT_APP_URL_PATH'], $row_rsPoints['sounding']);
+
+    foreach ($results as $result) {
+      if ($result['hasPdf']) {
+        $pdf = sprintf('<a href="%s/data/pdf/%s.pdf">Adobe .pdf</a>',
+            $MOUNT_PATH, $result['sounding']);
+      } else {
+        $pdf = 'Adobe .pdf';
       }
-      $txt_file = sprintf('%s/txt/%s.txt', $_SERVER['REDIRECT_APP_DATA_DIR'], $row_rsPoints['sounding']);
-      $txt = 'ASCII .txt';
-      if (file_exists($txt_file)) {
-        $txt = sprintf('<a href="%s/data/txt/%s.txt">ASCII .txt</a>', $_SERVER['REDIRECT_APP_URL_PATH'], $row_rsPoints['sounding']);
+
+      if ($result['hasTxt']) {
+        $txt = sprintf('<a href="%s/data/txt/%s.txt">ASCII .txt</a>',
+            $MOUNT_PATH, $result['sounding']);
+      } else {
+        $txt = 'ASCII .txt';
       }
-      $html .= sprintf ('<tr><td>%s</td><td>%s | %s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>',
-        $row_rsPoints['sounding'],
+
+      $html .= sprintf('
+        <tr>
+          <td>%s</td>
+          <td>%s | %s</td>
+          <td>%s</td>
+          <td>%s</td>
+          <td>%s</td>
+          <td>%s</td>
+          <td>%s</td>
+        </tr>',
+        $result['sounding'],
         $pdf,
         $txt,
-        $row_rsPoints['date'],
-        $row_rsPoints['depth'],
-        $row_rsPoints['lon'],
-        $row_rsPoints['lat'],
-        $row_rsPoints['v30']
+        $result['date'],
+        $result['depth'],
+        $result['lon'],
+        $result['lat'],
+        $result['v30']
       );
     }
+
     $html .= '</table>';
     $html .= '<p>&laquo; <a href="../">Back to map view of data</a></p>';
-
   }
 
-  // flatten regions array
-  $regions_flat = array();
-  array_walk_recursive($regions, function($v, $k) use (&$regions_flat) {
-    $regions_flat[$k] = $v;
-  });
+  // find region display name
+  $regionDisplay = null;
+  foreach ($regions as $k1 => $v1) {
+    if ($k1 === $region) {
+      $regionDisplay = $v1;
+      break;
+    }
+
+    if (is_array($v1)) {
+      foreach ($v1 as $k2 => $v2) {
+        if ($k2 === $region) {
+          $regionDisplay = $v2;
+          break;
+        }
+      }
+    }
+  }
 
   $TITLE = sprintf('%s of CPT Data<span>:</span> <strong>%s</strong>',
-      ucfirst($display), $regions_flat[$region]);
+      ucfirst($display), $regionDisplay);
 
   include_once 'template.inc.php';
 }

@@ -33,6 +33,8 @@
     "grunt-contrib-jshint": "^0.11.0",
     "grunt-contrib-watch": "^0.6.1",
     "hazdev-template": "usgs/hazdev-template",
-    "leaflet": "^0.7.3"
+    "hazdev-webutils": "git://github.com/usgs/hazdev-webutils",
+    "leaflet": "^0.7.3",
+    "leaflet.markercluster": "^0.4.0"
   }
 }

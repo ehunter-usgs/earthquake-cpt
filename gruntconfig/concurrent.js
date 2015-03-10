@@ -6,6 +6,7 @@ var concurrent = {
     'browserify:data',
     'copy:build',
     'copy:leaflet',
+    'copy:cluster',
     'compass:build'
   ]
 };
