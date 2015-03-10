@@ -29,7 +29,8 @@ var watch = {
     ],
     tasks: [
       'jshint:scripts',
-      'browserify:index'
+      'browserify:index',
+      'browserify:data',
     ]
   },
 
