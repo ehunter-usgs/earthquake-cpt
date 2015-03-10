@@ -1,0 +1,60 @@
+@import 'leaflet.css';
+
+h1 span {
+  display: none;
+}
+h1 strong {
+  display: block;
+  font-weight: normal;
+  font-size: .8em;
+  margin: .5em 0;
+}
+
+/* Map ----------------------------------------------------------- */
+
+#map {
+  width: 784px;
+  height: 600px;
+  margin-top: 2em;
+}
+
+.bubble h1 {
+  font-size: 1.35em;
+  margin: 0;
+}
+.bubble h1 span {
+  font-size: .8em;
+  color: #666;
+  display: block;
+  margin-top: .25em;
+}
+.bubble h2 {
+  font-size: 1.1em;
+  margin: 1em 0 .5em 0;
+  padding: 2px;
+  line-height: 1;
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+}
+.bubble img {
+  padding-bottom: .8em;
+  display: block;
+  margin: 0 auto;
+}
+.bubble p {
+  font-size: 1em;
+  margin-top: 1em;
+}
+.leaflet-container .bubble a {
+  color: #00c;
+}
+
+.gsc-input {
+    width: 85%;
+}
+
+#numstations {
+  font-size: 0.85em;
+  margin: 0;
+  text-align: right;
+}
