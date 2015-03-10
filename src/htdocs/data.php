@@ -45,6 +45,7 @@ if (!isset($TEMPLATE)) {
       }
     }
   }
+  $NAVIGATION .= navItem($MOUNT_PATH . '/index.php', 'CPT Overview');
 
   if ($display == 'map') {
 
