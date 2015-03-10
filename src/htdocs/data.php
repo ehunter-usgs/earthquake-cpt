@@ -49,7 +49,10 @@ if (!isset($TEMPLATE)) {
   if ($display == 'map') {
 
     $FOOT = '
-      <script>var DATA_URL = \'' . $MOUNT_PATH . '/getStationList.json.php?region=' . $region . '\';</script>
+      <script>
+        var MOUNT_PATH = \'' . $MOUNT_PATH . '\';
+        var REGION = \'' . $region . '\';
+      </script>
       <script src="' . $MOUNT_PATH . '/js/data.js"></script>
     ';
 

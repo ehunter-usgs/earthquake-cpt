@@ -10,13 +10,15 @@ var CPT = function (options) {
   var _this,
       _initialize,
 
+      _baseUrl,
       _bounds,
       _cluster,
       _container,
       _ctrlLayers,
       _map,
       _markers,
-      _url,
+      _dataUrl,
+      _region,
 
       _addBaseLayers,
       _addMarkers,
@@ -27,8 +29,10 @@ var CPT = function (options) {
   _this = {};
 
   _initialize = function (options) {
+    _baseUrl = options.baseUrl || '';
     _container = options.container || document.createElement('div');
-    _url = options.url || 'getStationList.json.php';
+    _dataUrl = options.dataUrl || 'getStationList.json.php';
+    _region = options.region || '';
 
     _initMap();
   };
@@ -98,11 +102,11 @@ var CPT = function (options) {
               '<h2>Download Data</h2>',
               '<ul>',
                 '<li>',
-                  '<a href="/reserach/cpt/data/pdf/',
+                  '<a href="', _baseUrl, '/data/pdf/',
                       sounding, '.pdf">Processed Data</a> (Adobe .pdf)',
                 '</li>',
                 '<li>',
-                  '<a href="/research/cpt/data/txt/',
+                  '<a href="', _baseUrl, '/data/txt/',
                       sounding, '.txt">Raw Data</a> (ASCII .txt)',
                 '</li>',
               '</ul>',
@@ -122,7 +126,7 @@ var CPT = function (options) {
 
   _fetchMarkers = function () {
     Xhr.ajax({
-      url: _url,
+      url: _dataUrl + '?region=' + _region,
       success: function (data) {
         _addMarkers(data);
       }

@@ -12,6 +12,7 @@ module.exports = function (grunt) {
     'configureProxies:build',
     'concurrent:build', // browserify:index, copy:build, compass:build
     'connect:template',
+    'connect:data',
     'connect:build',
     'watch'
   ]);

@@ -40,6 +40,22 @@ var connect = {
       rewrite: {
         '^/theme': ''
       }
+    },
+    {
+      context: iniConfig.MOUNT_PATH + '/data/pdf',
+      host: 'localhost',
+      port: config.dataPort,
+      rewrite: {
+        '^/data': ''
+      }
+    },
+    {
+      context: iniConfig.MOUNT_PATH + '/data/txt',
+      host: 'localhost',
+      port: config.dataPort,
+      rewrite: {
+        '^/data': ''
+      }
     }
   ],
 
@@ -57,6 +73,13 @@ var connect = {
     options: {
       base: ['node_modules/hazdev-template/dist/htdocs'],
       port: config.templatePort
+    }
+  },
+
+  data: {
+    options: {
+      base: [iniConfig.DATA_DIR],
+      port: config.dataPort
     }
   }
 };
