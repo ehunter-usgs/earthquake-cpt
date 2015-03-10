@@ -7,7 +7,10 @@ var compass = {
     options: {
       sassDir: config.src,
       cssDir: config.build + '/' + config.src,
-      environment: 'development'
+      environment: 'development',
+      importPath: [
+        process.cwd() + '/node_modules/hazdev-webutils/src'
+      ]
     }
   }
 };
