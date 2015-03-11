@@ -31,6 +31,22 @@ var copy = {
     src: [
       'MarkerCluster.Default.css'
     ]
+  },
+
+  dist: {
+    cwd: config.build + '/' + config.src,
+    dest: config.dist,
+    expand: true,
+    src: [
+      'conf/config.inc.php',
+
+      'htdocs/css/images/**/*',
+      'htdocs/images/**/*',
+      'htdocs/*.html',
+      'htdocs/*.php',
+
+      'lib/**/*'
+    ]
   }
 };
 

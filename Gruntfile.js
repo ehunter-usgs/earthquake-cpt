@@ -6,6 +6,16 @@ module.exports = function (grunt) {
   gruntConfig.tasks.forEach(grunt.loadNpmTasks);
   grunt.initConfig(gruntConfig);
 
+  grunt.registerTask('dist', [
+    'copy:dist',
+    'uglify',
+    'cssmin',
+    'configureProxies:dist',
+    'connect:template',
+    'connect:data',
+    'connect:dist:keepalive'
+  ]);
+
   grunt.registerTask('default', [
     'clean',
     'jshint',

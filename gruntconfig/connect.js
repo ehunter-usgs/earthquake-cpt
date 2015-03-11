@@ -52,6 +52,15 @@ var connect = {
     }
   },
 
+  dist: {
+    options: {
+      base: [config.dist + '/htdocs'],
+      middleware: addMiddleware,
+      open: 'http://localhost:' + config.distPort + iniConfig.MOUNT_PATH + '/index.php',
+      port: config.distPort
+    }
+  },
+
   template: {
     options: {
       base: ['node_modules/hazdev-template/dist/htdocs'],
