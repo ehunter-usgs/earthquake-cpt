@@ -41,29 +41,7 @@ var connect = {
     hostname: '*'
   },
 
-  proxies: [
-    {
-      context: '/theme/',
-      host: 'localhost',
-      port: config.templatePort,
-      rewrite: {
-        '^/theme': ''
-      }
-    },
-    {
-      context: iniConfig.MOUNT_PATH + '/data/pdf',
-      host: 'localhost',
-      port: config.dataPort,
-      rewrite: dataProxyRewrite
-    },
-    {
-      context: iniConfig.MOUNT_PATH + '/data/txt',
-      host: 'localhost',
-      port: config.dataPort,
-      rewrite: dataProxyRewrite
-    }
-  ],
-
+  // localhosts running on separate ports
   build: {
     options: {
       base: [config.build + '/' + config.src + '/htdocs'],
@@ -86,7 +64,31 @@ var connect = {
       base: [iniConfig.DATA_DIR],
       port: config.dataPort
     }
-  }
+  },
+
+  // proxy definitions for build server to route requests to correct localhost
+  proxies: [
+    {
+      context: '/theme/',
+      host: 'localhost',
+      port: config.templatePort,
+      rewrite: {
+        '^/theme': ''
+      }
+    },
+    {
+      context: iniConfig.MOUNT_PATH + '/data/pdf',
+      host: 'localhost',
+      port: config.dataPort,
+      rewrite: dataProxyRewrite
+    },
+    {
+      context: iniConfig.MOUNT_PATH + '/data/txt',
+      host: 'localhost',
+      port: config.dataPort,
+      rewrite: dataProxyRewrite
+    }
+  ]
 };
 
 module.exports = connect;
