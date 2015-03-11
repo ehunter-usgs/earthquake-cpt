@@ -5,11 +5,16 @@ var config = require('./config');
 var iniConfig = require('ini').parse(require('fs')
     .readFileSync(config.src + '/conf/config.ini', 'utf-8'));
 
+var dataProxyRewrite = {};
+dataProxyRewrite['^' + iniConfig.MOUNT_PATH + '/data'] = '';
+
 var rewrites = [
   {
     from: '^' + iniConfig.MOUNT_PATH + '/data/?(\\w+)?/?(table|map)?/?$',
     to: '/data.php?region=$1&display=$2'
   },
+
+  // analagous to httpd.conf alias
   {
     from: '^' + iniConfig.MOUNT_PATH + '/?(.*)$',
     to: '/$1'
@@ -49,17 +54,13 @@ var connect = {
       context: iniConfig.MOUNT_PATH + '/data/pdf',
       host: 'localhost',
       port: config.dataPort,
-      rewrite: {
-        '^/data': ''
-      }
+      rewrite: dataProxyRewrite
     },
     {
       context: iniConfig.MOUNT_PATH + '/data/txt',
       host: 'localhost',
       port: config.dataPort,
-      rewrite: {
-        '^/data': ''
-      }
+      rewrite: dataProxyRewrite
     }
   ],
 
