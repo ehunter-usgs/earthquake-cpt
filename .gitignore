@@ -2,3 +2,4 @@ node_modules
 .build
 .sass-cache
 src/conf/config.ini
+src/conf/httpd.conf
