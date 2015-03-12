@@ -1,6 +1,7 @@
 <?php
 if (!isset($TEMPLATE)) {
   $TITLE = "CPT Publications";
+  $NAVIGATION = true;
   include_once 'template.inc.php';
 }
 ?>

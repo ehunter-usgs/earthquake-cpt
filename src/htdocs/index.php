@@ -1,7 +1,11 @@
 <?php
 if (!isset($TEMPLATE)) {
   $TITLE = "Cone Penetration Testing (CPT)";
-  $HEAD = '<link rel="stylesheet" href="../style.css"/>';
+  $NAVIGATION = true;
+  $HEAD = '
+    <link rel="stylesheet" href="css/index.css"/>
+  ';
+  $FOOT = '<script src="js/index.js"></script>';
 
   include_once 'template.inc.php';
 }
