@@ -8,6 +8,12 @@ var concurrent = {
     'copy:leaflet',
     'copy:cluster',
     'compass:build'
+  ],
+
+  dist: [
+    'copy:dist',
+    'uglify',
+    'cssmin'
   ]
 };
 

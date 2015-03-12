@@ -6,10 +6,16 @@ module.exports = function (grunt) {
   gruntConfig.tasks.forEach(grunt.loadNpmTasks);
   grunt.initConfig(gruntConfig);
 
+  grunt.registerTask('build', [
+    'clean',
+    'jshint',
+    'concurrent:build' // browserify:index, copy:build, compass:build
+  ]);
+
   grunt.registerTask('dist', [
-    'copy:dist',
-    'uglify',
-    'cssmin',
+    'build',
+    'concurrent:dist', // copy:dist, uglify, cssmin
+
     'configureProxies:dist',
     'connect:template',
     'connect:data',
@@ -17,10 +23,9 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'clean',
-    'jshint',
+    'build',
+
     'configureProxies:build',
-    'concurrent:build', // browserify:index, copy:build, compass:build
     'connect:template',
     'connect:data',
     'connect:build',

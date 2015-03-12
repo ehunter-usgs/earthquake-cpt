@@ -39,6 +39,7 @@ var copy = {
     expand: true,
     src: [
       'conf/config.inc.php',
+      'conf/config.ini',
 
       'htdocs/css/images/**/*',
       'htdocs/images/**/*',

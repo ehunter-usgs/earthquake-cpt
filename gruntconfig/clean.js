@@ -4,7 +4,8 @@ var config = require('./config');
 
 var clean = {
   build: [
-    config.build
+    config.build,
+    config.dist
   ]
 };
 
