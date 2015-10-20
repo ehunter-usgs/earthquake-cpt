@@ -1,9 +1,14 @@
 @import 'mvc/ModalView';
 
+figure.right {
+  margin-bottom: 2em;
+}
+
 h2.researcher {
   border-top: 1px dotted #ccc;
   margin: 2em 16px 0 0;
   padding-top: 1em;
+  clear: both;
 }
 .researcher + ul {
     padding-left: 0;
