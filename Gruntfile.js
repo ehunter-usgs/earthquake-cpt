@@ -16,11 +16,16 @@ module.exports = function (grunt) {
     'postcss:dev'
   ]);
 
-  grunt.registerTask('dist', [
+  grunt.registerTask('builddist', [
     'build',
+
     'copy:dist',
     'uglify',
-    'postcss:dist',
+    'postcss:dist'
+  ]);
+
+  grunt.registerTask('dist', [
+    'builddist',
 
     'configureProxies:dist',
     'connect:template',
