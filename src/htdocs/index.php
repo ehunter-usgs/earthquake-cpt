@@ -58,7 +58,7 @@ if (!isset($TEMPLATE)) {
 </ul>
 
 <h2 class="researcher">Scientific Staff</h2>
-<ul>
+<ul class="no-style">
   <li>Mike Bennett</li>
   <li><a href="https://profile.usgs.gov/tholzer/">Tom Holzer</a></li>
   <li>Tom Noce</li>
