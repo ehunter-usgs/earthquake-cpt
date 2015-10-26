@@ -19,17 +19,7 @@ var copy = {
     dest: config.build + '/' + config.src + '/htdocs/css',
     expand: true,
     src: [
-      'leaflet.css',
       'images/*'
-    ]
-  },
-
-  cluster: {
-    cwd: process.cwd() + '/node_modules/leaflet.markercluster/dist',
-    dest: config.build + '/' + config.src + '/htdocs/css',
-    expand: true,
-    src: [
-      'MarkerCluster.Default.css'
     ]
   },
 

@@ -13,7 +13,6 @@ module.exports = function (grunt) {
     'browserify:data',
     'copy:build',
     'copy:leaflet',
-    'copy:cluster',
     'postcss:dev'
   ]);
 
