@@ -35,3 +35,4 @@ script:
   - test -f 'dist/lib/pre-install'
   - test -f 'dist/lib/pre-install.php'
   - test -f 'dist/lib/uninstall'
+  - test `find dist -type f | wc -l` -eq 41
