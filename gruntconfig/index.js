@@ -3,7 +3,6 @@
 var gruntConfig = {
 
   browserify: require('./browserify'),
-  concurrent: require('./concurrent'),
   clean: require('./clean'),
   compass: require('./compass'),
   connect: require('./connect'),
@@ -15,7 +14,6 @@ var gruntConfig = {
 
   tasks: [
     'grunt-browserify',
-    'grunt-concurrent',
     'grunt-connect-proxy',
     'grunt-contrib-clean',
     'grunt-contrib-compass',

@@ -9,12 +9,19 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean',
     'jshint',
-    'concurrent:build' // browserify:index, copy:build, compass:build
+    'browserify:index',
+    'browserify:data',
+    'copy:build',
+    'copy:leaflet',
+    'copy:cluster',
+    'compass:build'
   ]);
 
   grunt.registerTask('dist', [
     'build',
-    'concurrent:dist', // copy:dist, uglify, cssmin
+    'copy:dist',
+    'uglify',
+    'cssmin',
 
     'configureProxies:dist',
     'connect:template',
