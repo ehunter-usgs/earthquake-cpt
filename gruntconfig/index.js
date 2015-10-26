@@ -4,11 +4,10 @@ var gruntConfig = {
 
   browserify: require('./browserify'),
   clean: require('./clean'),
-  compass: require('./compass'),
   connect: require('./connect'),
   copy: require('./copy'),
-  cssmin: require('./cssmin'),
   jshint: require('./jshint'),
+  postcss: require('./postcss'),
   uglify: require('./uglify'),
   watch: require('./watch'),
 
@@ -16,13 +15,12 @@ var gruntConfig = {
     'grunt-browserify',
     'grunt-connect-proxy',
     'grunt-contrib-clean',
-    'grunt-contrib-compass',
     'grunt-contrib-connect',
     'grunt-contrib-copy',
-    'grunt-contrib-cssmin',
     'grunt-contrib-jshint',
     'grunt-contrib-uglify',
-    'grunt-contrib-watch'
+    'grunt-contrib-watch',
+    'grunt-postcss'
   ]
 };
 

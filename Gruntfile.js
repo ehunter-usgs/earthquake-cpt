@@ -14,14 +14,14 @@ module.exports = function (grunt) {
     'copy:build',
     'copy:leaflet',
     'copy:cluster',
-    'compass:build'
+    'postcss:dev'
   ]);
 
   grunt.registerTask('dist', [
     'build',
     'copy:dist',
     'uglify',
-    'cssmin',
+    'postcss:dist',
 
     'configureProxies:dist',
     'connect:template',
