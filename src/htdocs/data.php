@@ -38,11 +38,11 @@ if (!isset($TEMPLATE)) {
       $NAVIGATION .= navGroup($key, $children);
     } else {
       if ($key === '') {
+        $NAVIGATION .= '<a href="' . $MOUNT_PATH . '/data/">';
         if ($region === '') {
-          $NAVIGATION .= '<strong>' . $value . '</strong>';
+          $NAVIGATION .= '<strong>' . $value . '</strong></a>';
         } else {
-          $NAVIGATION .= '<a href="' . $MOUNT_PATH . '/data/">' . $value .
-              '</a>';
+          $NAVIGATION .= $value . '</a>';
         }
       } else {
         $NAVIGATION .= navItem($MOUNT_PATH . '/data/' . $key . '/', $value);
