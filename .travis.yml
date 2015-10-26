@@ -1,0 +1,39 @@
+sudo: false
+language: php
+php:
+  - '5.6'
+env:
+  - noninsteractive=true
+before_install:
+  - composer self-update
+  - nvm install stable
+  - nvm use stable
+  - npm install -g grunt-cli
+  - npm --version
+  - node --version
+install:
+  - npm install
+  - php ./src/lib/pre-install.php --non-interactive
+  - grunt dist
+script:
+  - test -d 'dist/htdocs/css/images'
+  - test -f 'dist/htdocs/css/data.css'
+  - test -f 'dist/htdocs/css/index.css'
+  - test -f 'dist/htdocs/js/data.js'
+  - test -f 'dist/htdocs/js/index.js'
+  - test -f 'dist/htdocs/_config.inc.php'
+  - test -f 'dist/htdocs/_navigation.inc.php'
+  - test -f 'dist/htdocs/cone.html'
+  - test -f 'dist/htdocs/data.php'
+  - test -f 'dist/htdocs/db.inc.php'
+  - test -f 'dist/htdocs/getStationList.json.php'
+  - test -f 'dist/htdocs/index.php'
+  - test -f 'dist/htdocs/pubs.php'
+  - test -f 'dist/htdocs/regions.inc.php'
+  - test -f 'dist/htdocs/regions.inc.php'
+  - test -f 'dist/htdocs/shaking.html'
+  - test -f 'dist/htdocs/lib/configure.php'
+  - test -f 'dist/htdocs/lib/install-funcs.inc.php'
+  - test -f 'dist/htdocs/lib/pre-install'
+  - test -f 'dist/htdocs/lib/pre-install.php'
+  - test -f 'dist/htdocs/lib/uninstall'
