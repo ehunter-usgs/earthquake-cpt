@@ -12,7 +12,7 @@ before_install:
 install:
   - npm install
   - php ./src/lib/pre-install.php --non-interactive
-  - grunt dist
+  - grunt builddist
 script:
   - test -d 'dist/htdocs/css/images'
   - test -f 'dist/htdocs/css/data.css'
