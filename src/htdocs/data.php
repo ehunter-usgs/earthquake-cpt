@@ -38,11 +38,11 @@ if (!isset($TEMPLATE)) {
       $NAVIGATION .= navGroup($key, $children);
     } else {
       if ($key === '') {
+        $NAVIGATION .= '<a href="' . $MOUNT_PATH . '/data/">';
         if ($region === '') {
-          $NAVIGATION .= '<strong>' . $value . '</strong>';
+          $NAVIGATION .= '<strong>' . $value . '</strong></a>';
         } else {
-          $NAVIGATION .= '<a href="' . $MOUNT_PATH . '/data/">' . $value .
-              '</a>';
+          $NAVIGATION .= $value . '</a>';
         }
       } else {
         $NAVIGATION .= navItem($MOUNT_PATH . '/data/' . $key . '/', $value);
@@ -70,7 +70,8 @@ if (!isset($TEMPLATE)) {
 
   } else {
     include_once 'db.inc.php';
-    $html = '<table id="soundings" cellspacing="1" class="tabular">';
+    $html = '<div class="horizontal-scrolling">';
+    $html .= '<table id="soundings">';
     $html .= '<tr><th>Sounding</th><th>Download</th><th>Date</th><th>Depth (m)</th><th>Longitude</th><th>Latitude</th><th>V,30 (m/s)</th></tr>';
 
     foreach ($results as $result) {
@@ -110,6 +111,7 @@ if (!isset($TEMPLATE)) {
     }
 
     $html .= '</table>';
+    $html .= '</div>';
     $html .= '<p>&laquo; <a href="../">Back to map view of data</a></p>';
   }
 
