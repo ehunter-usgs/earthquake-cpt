@@ -41,8 +41,9 @@ var CPT = function (options) {
   _addBaseLayers = function () {
     var baseLayers = {};
 
-    baseLayers.terrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-      attribution: 'Tiles &copy; Esri and partners'
+    baseLayers.terrain = L.tileLayer('https://{s}.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri and partners',
+      subdomains: ['server', 'services']
     }).addTo(_map);
 
     baseLayers.greyscale = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
