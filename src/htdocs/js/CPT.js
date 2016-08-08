@@ -39,25 +39,23 @@ var CPT = function (options) {
 
 
   _addBaseLayers = function () {
-    var osm,
-        sat;
+    var baseLayers = {};
 
-    osm = L.tileLayer('http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
-      subdomains: ['otile1', 'otile2', 'otile3', 'otile4'],
-      attribution: 'Maps provided by <a href="http://open.mapquest.com" ' +
-          '>MapQuest</a>, ' +
-          '<a href="http://www.openstreetmap.org/" ' +
-          '>OpenStreetMap</a> and contributors.'
+    baseLayers.terrain = L.tileLayer('https://{s}.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri and partners',
+      subdomains: ['server', 'services']
     }).addTo(_map);
 
-    sat = L.tileLayer('http://{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
-        subdomains: ['otile1', 'otile2', 'otile3', 'otile4'],
-        attribution: 'Maps provided by <a href="http://open.mapquest.com" ' +
-            '>MapQuest</a> (portions courtesy NASA/JPL and USDA).'
+    baseLayers.greyscale = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' +
+        'OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">' +
+        'CartoDB</a>',
+      maxZoom: 19,
+      subdomains: 'abcd'
     });
 
-    _ctrlLayers.addBaseLayer(osm, 'Map (Mapquest)')
-        .addBaseLayer(sat, 'Satellite');
+    _ctrlLayers.addBaseLayer(baseLayers.terrain, 'Terrain')
+        .addBaseLayer(baseLayers.greyscale, 'Greyscale');
   };
 
   _addMarkers = function (markerData) {

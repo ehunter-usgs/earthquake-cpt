@@ -14,10 +14,21 @@ h1 > strong {
 
 /* Map ----------------------------------------------------------- */
 
+/* template's css is getting the way */
+
+
 #map {
   height: 600px;
   margin-top: 2em;
   width: 100%;
+
+  input[type=checkbox], input[type=radio] {
+    display: inline;
+    height: auto;
+    opacity: 1;
+    position: static;
+    width: auto;
+  }
 }
 
 .bubble > h1 {
