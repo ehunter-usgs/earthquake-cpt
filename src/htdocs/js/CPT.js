@@ -46,9 +46,9 @@ var CPT = function (options) {
       subdomains: ['server', 'services']
     }).addTo(_map);
 
-    baseLayers.greyscale = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    baseLayers.greyscale = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' +
-        'OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">' +
+        'OpenStreetMap</a> &copy; <a href="https://cartodb.com/attributions">' +
         'CartoDB</a>',
       maxZoom: 19,
       subdomains: 'abcd'
