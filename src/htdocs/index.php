@@ -56,10 +56,3 @@ if (!isset($TEMPLATE)) {
         Exploration with the Cone Penetration Testing Truck</a>
   </li>
 </ul>
-
-<h2 class="researcher">Scientific Staff</h2>
-<ul class="no-style">
-  <li>Mike Bennett</li>
-  <li><a href="https://profile.usgs.gov/tholzer/">Tom Holzer</a></li>
-  <li>Tom Noce</li>
-</ul>
