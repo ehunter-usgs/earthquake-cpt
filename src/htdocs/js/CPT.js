@@ -41,21 +41,18 @@ var CPT = function (options) {
   _addBaseLayers = function () {
     var baseLayers = {};
 
-    baseLayers.terrain = L.tileLayer('https://{s}.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-      attribution: 'Tiles &copy; Esri and partners',
-      subdomains: ['server', 'services']
-    }).addTo(_map);
+    baseLayers.terrain = L.tileLayer(
+      'https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}',
+      options
+    ).addTo(_map);
 
-    baseLayers.greyscale = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' +
-        'OpenStreetMap</a> &copy; <a href="https://cartodb.com/attributions">' +
-        'CartoDB</a>',
-      maxZoom: 19,
-      subdomains: 'abcd'
-    });
+    baseLayers.ocean = L.tileLayer(
+      'https://services.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}',
+      options
+    );
 
     _ctrlLayers.addBaseLayer(baseLayers.terrain, 'Terrain')
-        .addBaseLayer(baseLayers.greyscale, 'Greyscale');
+        .addBaseLayer(baseLayers.ocean, 'Ocean');
   };
 
   _addMarkers = function (markerData) {
@@ -133,6 +130,7 @@ var CPT = function (options) {
 
   _initMap = function () {
     _map = L.map(_container, {
+      attributionControl: false,
       scrollWheelZoom: false
     });
 
