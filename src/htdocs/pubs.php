@@ -8,7 +8,7 @@ if (!isset($TEMPLATE)) {
 
 <p>
   If you use CPT data from this web site in a publication or thesis, please
-  send complete citation to <a href="mailto:tholzer@usgs.gov">Tom Holzer</a>
+  <a href="mailto:shaefner@usgs.gov">send complete citation</a>
   for posting on this web site.
 </p>
 

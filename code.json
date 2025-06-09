@@ -1,0 +1,30 @@
+{
+  "name": "Earthquake CPT",
+  "organization": "U.S. Geological Survey",
+  "description": "Cone Penetration Testing Data",
+  "status": "",
+  "homepage": "https://github.com/usgs/earthquake-cpt",
+  "downloadURL": "https://github.com/usgs/earthquake-cpt/archive/master.zip",
+
+  "openSourceProject": 1,
+  "license": "https://github.com/usgs/earthquake-cpt/blob/master/LICENSE.md",
+  "vcs": "git",
+  "repository": "https://github.com/usgs/earthquake-cpt.git",
+
+  "tags": [
+    "CPT Data",
+    "Cone Penetration Testing"
+  ],
+  "languages": [
+    "javascript",
+    "php"
+  ],
+
+  "contact": {
+    "name": "Scott Haefner",
+    "email": "shaefner@usgs.gov"
+  },
+  "updated": {
+    "metadataLastUpdated": "2017-08-03"
+  }
+}

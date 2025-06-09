@@ -39,25 +39,20 @@ var CPT = function (options) {
 
 
   _addBaseLayers = function () {
-    var osm,
-        sat;
+    var baseLayers = {};
 
-    osm = L.tileLayer('http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
-      subdomains: ['otile1', 'otile2', 'otile3', 'otile4'],
-      attribution: 'Maps provided by <a href="http://open.mapquest.com" ' +
-          '>MapQuest</a>, ' +
-          '<a href="http://www.openstreetmap.org/" ' +
-          '>OpenStreetMap</a> and contributors.'
-    }).addTo(_map);
+    baseLayers.terrain = L.tileLayer(
+      'https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}',
+      options
+    ).addTo(_map);
 
-    sat = L.tileLayer('http://{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
-        subdomains: ['otile1', 'otile2', 'otile3', 'otile4'],
-        attribution: 'Maps provided by <a href="http://open.mapquest.com" ' +
-            '>MapQuest</a> (portions courtesy NASA/JPL and USDA).'
-    });
+    baseLayers.ocean = L.tileLayer(
+      'https://services.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}',
+      options
+    );
 
-    _ctrlLayers.addBaseLayer(osm, 'Map (Mapquest)')
-        .addBaseLayer(sat, 'Satellite');
+    _ctrlLayers.addBaseLayer(baseLayers.terrain, 'Terrain')
+        .addBaseLayer(baseLayers.ocean, 'Ocean');
   };
 
   _addMarkers = function (markerData) {
@@ -135,6 +130,7 @@ var CPT = function (options) {
 
   _initMap = function () {
     _map = L.map(_container, {
+      attributionControl: false,
       scrollWheelZoom: false
     });
 

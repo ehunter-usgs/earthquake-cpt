@@ -7,13 +7,29 @@ date_default_timezone_set('UTC');
 
 include_Once 'db.inc.php'; // Do db query. Have
 
+if (!is_array($results) || empty($results)) {
+    // Handle the error (e.g., log it, display an error message, return an empty JSON)
+    $soundings = array(
+        'type' => 'FeatureCollection',
+        'metadata' => array(
+            'generated' => date('c'),
+            'count' => 0
+        ),
+        'features' => array()
+    );
+    $json = json_encode($soundings);
+    header('Content-Type: application/json');
+    print $json;
+    exit; // Stop execution
+}
+
 $soundings = array(
-  'type' => 'FeatureCollection',
-  'metadata' => array(
-    'generated' => date('c'),
-    'count' => count($results)
-  ),
-  'features' => array()
+    'type' => 'FeatureCollection',
+    'metadata' => array(
+        'generated' => date('c'),
+        'count' => count($results)
+    ),
+    'features' => array()
 );
 
 foreach ($results as $result) {
@@ -40,17 +56,19 @@ foreach ($results as $result) {
 }
 
 $callback = param('callback', '');
+$allowed = '/^[a-zA-Z_$][0-9a-zA-Z_$]*$/'; // Example validation
 if ($callback == '' || !preg_match($allowed, $callback)) {
-  $callback = '';
+    $callback = '';
 }
 
 // Create json object from array and display
 $json = json_encode($soundings);
 
 if ($callback) {
-  header('Content-Type: text/javascript');
-  printf ('%s(%s);', $callback, $json);
+    header('Content-Type: text/javascript');
+    printf ('%s(%s);', $callback, $json);
 } else {
-  header('Content-Type: application/json');
-  print $json;
+    header('Content-Type: application/json');
+    print $json;
 }
+?>
